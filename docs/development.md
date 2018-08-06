@@ -114,8 +114,8 @@ Edit `bitcore-node-alarmx.json` with something similar to:
   "services": [
     "bitcoind",
     "web",
-    "insight-api-alarmx",
-    "insight-ui-alarmx",
+    "insight-api",
+    "insight-ui",
     "<additional_service>"
   ],
   "servicesConfig": {
@@ -129,7 +129,7 @@ Edit `bitcore-node-alarmx.json` with something similar to:
 }
 ```
 
-**Note**: To install services [insight-api-alarmx](https://github.com/bitpay/insight-api-alarmx) and [insight-ui-alarmx](https://github.com/bitpay/insight-ui-alarmx) you'll need to clone the repositories locally.
+**Note**: To install services [insight-api](https://github.com/bitpay/insight-api) and [insight-ui](https://github.com/bitpay/insight-ui) you'll need to clone the repositories locally.
 
 Setup symlinks for all of the services and dependencies:
 
@@ -137,8 +137,8 @@ Setup symlinks for all of the services and dependencies:
 cd node_modules
 ln -s ~/bitcore-lib
 ln -s ~/bitcore-node-alarmx
-ln -s ~/insight-api-alarmx
-ln -s ~/insight-ui-alarmx
+ln -s ~/insight-api
+ln -s ~/insight-ui
 ```
 
 Make sure that the `<datadir>/bitcoin.conf` has the necessary settings, for example:
