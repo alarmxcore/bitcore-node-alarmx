@@ -24,16 +24,16 @@ describe('Bitcoin Cluster', function() {
     {
       datadir: path.resolve(__dirname, './data/node1'),
       conf: path.resolve(__dirname, './data/node1/alarmx.conf'),
-      rpcuser: 'alarmx',
+      rpcuser: 'bitcoin',
       rpcpassword: 'local321',
-      rpcport: 2578,
+      rpcport: 30521,
       zmqpubrawtx: 'tcp://127.0.0.1:30611',
       zmqpubhashblock: 'tcp://127.0.0.1:30611'
     },
     {
       datadir: path.resolve(__dirname, './data/node2'),
       conf: path.resolve(__dirname, './data/node2/alarmx.conf'),
-      rpcuser: 'alarmx',
+      rpcuser: 'bitcoin',
       rpcpassword: 'local321',
       rpcport: 30522,
       zmqpubrawtx: 'tcp://127.0.0.1:30622',
@@ -42,7 +42,7 @@ describe('Bitcoin Cluster', function() {
     {
       datadir: path.resolve(__dirname, './data/node3'),
       conf: path.resolve(__dirname, './data/node3/alarmx.conf'),
-      rpcuser: 'alarmx',
+      rpcuser: 'bitcoin',
       rpcpassword: 'local321',
       rpcport: 30523,
       zmqpubrawtx: 'tcp://127.0.0.1:30633',
@@ -108,22 +108,22 @@ describe('Bitcoin Cluster', function() {
             connect: [
               {
                 rpchost: '127.0.0.1',
-                rpcport: 2578,
-                rpcuser: 'alarmx',
+                rpcport: 30521,
+                rpcuser: 'bitcoin',
                 rpcpassword: 'local321',
                 zmqpubrawtx: 'tcp://127.0.0.1:30611'
               },
               {
                 rpchost: '127.0.0.1',
                 rpcport: 30522,
-                rpcuser: 'alarmx',
+                rpcuser: 'bitcoin',
                 rpcpassword: 'local321',
                 zmqpubrawtx: 'tcp://127.0.0.1:30622'
               },
               {
                 rpchost: '127.0.0.1',
                 rpcport: 30523,
-                rpcuser: 'alarmx',
+                rpcuser: 'bitcoin',
                 rpcpassword: 'local321',
                 zmqpubrawtx: 'tcp://127.0.0.1:30633'
               }

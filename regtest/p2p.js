@@ -75,7 +75,7 @@ describe('P2P Functionality', function() {
           protocol: 'http',
           host: '127.0.0.1',
           port: 30331,
-          user: 'alarmx',
+          user: 'bitcoin',
           pass: 'local321',
           rejectUnauthorized: false
         });

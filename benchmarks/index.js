@@ -1,7 +1,7 @@
 'use strict';
 
 var benchmark = require('benchmark');
-var bitcoin = require('alarmx');
+var bitcoin = require('bitcoin');
 var async = require('async');
 var maxTime = 20;
 
@@ -53,7 +53,7 @@ bitcoind.on('ready', function() {
   var client = new bitcoin.Client({
     host: 'localhost',
     port: 18332,
-    user: 'alarmx',
+    user: 'bitcoin',
     pass: 'local321'
   });
 
