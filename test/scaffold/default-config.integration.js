@@ -6,25 +6,22 @@ var sinon = require('sinon');
 var proxyquire = require('proxyquire');
 
 describe('#defaultConfig', function() {
-  var expectedExecPath = path.resolve(__dirname, process.env.HOME, './.dashcore/data/dashd');
+  var expectedExecPath = path.resolve(__dirname, process.env.HOME, './.bitcore/data/alarmxd');
 
   it('will return expected configuration', function() {
     var config = JSON.stringify({
       network: 'livenet',
       port: 3001,
       services: [
-        'dashd',
+        'bitcoind',
         'web'
       ],
       servicesConfig: {
-        dashd: {
-          connect: [{
-            rpchost: '127.0.0.1',
-            rpcport: 9998,
-            rpcuser: 'dash',
-            rpcpassword: 'local321',
-            zmqpubrawtx: 'tcp://127.0.0.1:28332'
-           }]
+        bitcoind: {
+          spawn: {
+            datadir: process.env.HOME + '/.bitcore/data',
+            exec: expectedExecPath
+          }
         }
       }
     }, null, 2);
@@ -32,7 +29,7 @@ describe('#defaultConfig', function() {
       fs: {
         existsSync: sinon.stub().returns(false),
         writeFileSync: function(path, data) {
-          path.should.equal(process.env.HOME + '/.dashcore/dashcore-node.json');
+          path.should.equal(process.env.HOME + '/.bitcore/bitcore-node-alarmx.json');
           data.should.equal(config);
         },
         readFileSync: function() {
@@ -45,32 +42,31 @@ describe('#defaultConfig', function() {
     });
     var home = process.env.HOME;
     var info = defaultConfig();
-    info.path.should.equal(home + '/.dashcore');
+    info.path.should.equal(home + '/.bitcore');
     info.config.network.should.equal('livenet');
     info.config.port.should.equal(3001);
-    info.config.services.should.deep.equal(['dashd', 'web']);
-    var dashd = info.config.servicesConfig.dashd;
-    should.exist(dashd);
+    info.config.services.should.deep.equal(['bitcoind', 'web']);
+    var bitcoind = info.config.servicesConfig.bitcoind;
+    should.exist(bitcoind);
+    bitcoind.spawn.datadir.should.equal(home + '/.bitcore/data');
+    bitcoind.spawn.exec.should.equal(expectedExecPath);
   });
   it('will include additional services', function() {
     var config = JSON.stringify({
       network: 'livenet',
       port: 3001,
       services: [
-        'dashd',
+        'bitcoind',
         'web',
         'insight-api',
         'insight-ui'
       ],
       servicesConfig: {
-        dashd: {
-          connect: [{
-            rpchost: '127.0.0.1',
-            rpcport: 9998,
-            rpcuser: 'dash',
-            rpcpassword: 'local321',
-            zmqpubrawtx: 'tcp://127.0.0.1:28332'
-          }]
+        bitcoind: {
+          spawn: {
+            datadir: process.env.HOME + '/.bitcore/data',
+            exec: expectedExecPath
+          }
         }
       }
     }, null, 2);
@@ -78,7 +74,7 @@ describe('#defaultConfig', function() {
       fs: {
         existsSync: sinon.stub().returns(false),
         writeFileSync: function(path, data) {
-          path.should.equal(process.env.HOME + '/.dashcore/dashcore-node.json');
+          path.should.equal(process.env.HOME + '/.bitcore/bitcore-node-alarmx.json');
           data.should.equal(config);
         },
         readFileSync: function() {
@@ -93,16 +89,18 @@ describe('#defaultConfig', function() {
     var info = defaultConfig({
       additionalServices: ['insight-api', 'insight-ui']
     });
-    info.path.should.equal(home + '/.dashcore');
+    info.path.should.equal(home + '/.bitcore');
     info.config.network.should.equal('livenet');
     info.config.port.should.equal(3001);
     info.config.services.should.deep.equal([
-      'dashd',
+      'bitcoind',
       'web',
       'insight-api',
       'insight-ui'
     ]);
-    var dashd = info.config.servicesConfig.dashd;
-    should.exist(dashd);
+    var bitcoind = info.config.servicesConfig.bitcoind;
+    should.exist(bitcoind);
+    bitcoind.spawn.datadir.should.equal(home + '/.bitcore/data');
+    bitcoind.spawn.exec.should.equal(expectedExecPath);
   });
 });

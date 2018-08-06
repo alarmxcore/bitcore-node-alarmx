@@ -41,19 +41,10 @@ describe('Logger', function() {
     console.error.callCount.should.equal(1);
     console.error.restore();
 
-    //Node 6+
-    if(console.hasOwnProperty('debug')){
-      sandbox.stub(console, 'debug');
-      logger.debug('Test debug log');
-      console.debug.callCount.should.equal(1);
-      console.debug.restore();
-    }else{
-      sandbox.stub(console, 'log');
-      logger.debug('Test debug log');
-      console.log.callCount.should.equal(1);
-      console.log.restore();
-    }
-
+    sandbox.stub(console, 'log');
+    logger.debug('Test debug log');
+    console.log.callCount.should.equal(1);
+    console.log.restore();
 
     sandbox.stub(console, 'warn');
     logger.warn('Test warn log');
@@ -75,21 +66,12 @@ describe('Logger', function() {
     console.error.callCount.should.equal(1);
     console.error.args[0][0].should.be.instanceof(Error);
     console.error.restore();
-    //Node 6+
-    if(console.hasOwnProperty('debug')){
-      sandbox.stub(console, 'debug');
-      logger.debug('Test debug log');
-      console.debug.callCount.should.equal(1);
-      should.equal(console.debug.args[0][0].match(/^\[/), null);
-      console.debug.restore();
-    }else{
-      sandbox.stub(console, 'log');
-      logger.debug('Test debug log');
-      console.log.callCount.should.equal(1);
-      should.equal(console.log.args[0][0].match(/^\[/), null);
-      console.log.restore();
-    }
 
+    sandbox.stub(console, 'log');
+    logger.debug('Test debug log');
+    console.log.callCount.should.equal(1);
+    should.equal(console.log.args[0][0].match(/^\[/), null);
+    console.log.restore();
 
     sandbox.stub(console, 'warn');
     logger.warn('Test warn log');
