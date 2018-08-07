@@ -15,7 +15,7 @@ To develop bitcore-node-alarmx:
 ```bash
 cd ~
 git clone git@github.com:<yourusername>/bitcore-node-alarmx.git
-git clone git@github.com:<yourusername>/bitcore-lib.git
+git clone git@github.com:<yourusername>/bitcore-lib-alarmx.git
 ```
 
 To develop bitcoin or to compile from source:
@@ -114,15 +114,15 @@ Edit `bitcore-node-alarmx.json` with something similar to:
   "services": [
     "bitcoind",
     "web",
-    "insight-api",
-    "insight-ui",
+    "insight-api-alarmx",
+    "insight-ui-alarmx",
     "<additional_service>"
   ],
   "servicesConfig": {
     "bitcoind": {
       "spawn": {
-        "datadir": "/home/<youruser>/.bitcoin",
-        "exec": "/home/<youruser>/bitcoin/src/bitcoind"
+        "datadir": "/home/<youruser>/.alarmx",
+        "exec": "/home/<youruser>/alarmx/src/alarmxd"
       }
     }
   }

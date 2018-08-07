@@ -6,16 +6,16 @@ root_dir="${HOME}/.bitcore"
 platform=`uname -a | awk '{print tolower($1)}'`
 arch=`uname -m`
 version="0.12.2"
-url="https://bamboo.alarmx.io/browse/DASHL-REL-13/artifact/JOB1/gitian-linux-alarmx-dist"
+url="https://github.com/alarmxcore/alarmx/releases/download/v0.12.2/"
 
 if [ "${platform}" == "linux" ]; then
     if [ "${arch}" == "x86_64" ]; then
-        tarball_name="dashcore-${version}-linux64.tar.gz"
+        tarball_name="alarmxcore-${version}-linux64.tar.gz"
     elif [ "${arch}" == "x86_32" ]; then
-        tarball_name="dashcore-${version}-linux32.tar.gz"
+        tarball_name="alarmxcore-${version}-linux32.tar.gz"
     fi
 elif [ "${platform}" == "darwin" ]; then
-    tarball_name="dashcore-${version}-osx64.tar.gz"
+    tarball_name="alarmxcore-${version}-osx64.tar.gz"
 else
     echo "Alarmx binary distribution not available for platform and architecture"
     exit -1
@@ -53,7 +53,7 @@ download_bitcoind() {
             echo "Unpacking alarmx distribution"
             tar -xvzf $tarball_name
             if test $? -eq 0; then
-                ln -sf "dashcore-${version}/bin/alarmxd"
+                ln -sf "alarmxcore-${version}/bin/alarmxd"
                 return;
             fi
         fi
